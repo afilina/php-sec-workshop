@@ -33,7 +33,11 @@ class AclController extends Controller
      */
     public function aclFixed(PurchaseRepository $purchaseRepo, ReflectionInterface $reflection, int $purchaseId)
     {
-        //...
+        $purchase = $purchaseRepo->findOneBy(['id' => $purchaseId, 'user' => 1]);
+
+        if ($purchase == null) {
+            throw $this->createNotFoundException();
+        }
 
         $code = $reflection->getMethodLines($this, 'aclFixed', 1, 1, true);
 

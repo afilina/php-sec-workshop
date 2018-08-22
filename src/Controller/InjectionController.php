@@ -33,9 +33,26 @@ class InjectionController extends Controller
      */
     public function injectionFixed(EntityManagerInterface $em, ReflectionInterface $reflection, string $userId)
     {
-        //...
+        $stmt = $em->getConnection()->prepare('SELECT id, amount FROM purchase WHERE user_id = :user_id');
+        $stmt->execute(['user_id' => $userId]);
+        $purchases = $stmt->fetchAll(FetchMode::ASSOCIATIVE);
 
         $code = $reflection->getMethodLines($this, 'injectionFixed', 1, 3, true);
+
+        return $this->render('injection/index.html.twig', [
+            'purchases' => $purchases,
+            'code' => $code,
+        ]);
+    }
+
+    /**
+     * @Route("/sql-injection-fixed-symfony/{userId}", name="injection_fixed_symfony")
+     */
+    public function injectionFixedSymfony(PurchaseRepository $purchaseRepo, ReflectionInterface $reflection, string $userId)
+    {
+        $purchases = $purchaseRepo->findBy(['user' => $userId]);
+
+        $code = $reflection->getMethodLines($this, 'injectionFixedSymfony', 1, 1, true);
 
         return $this->render('injection/index.html.twig', [
             'purchases' => $purchases,

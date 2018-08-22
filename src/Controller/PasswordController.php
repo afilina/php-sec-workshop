@@ -112,7 +112,7 @@ class PasswordController extends Controller
 
         $time = microtime(true);
         for ($i=0; $i<$numPasswords; $i++) {
-            //...
+            password_hash($plaintext, PASSWORD_DEFAULT, ['cost' => $cost]);
         }
         $time = microtime(true) - $time;
 

@@ -6,6 +6,7 @@
     <h3 class="header">Purchases</h3>
     <a href="{{ path('create_purchase', {redirect: app.request.get('_route')}) }}">Create purchase</a>
 
+    {{ form_start(form) }}
     <table>
         <tr>
             <th>Id</th>
@@ -16,13 +17,17 @@
             <tr>
                 <td>{{ item.id }}</td>
                 <td>${{ item.amount }}</td>
-                <td><a href="{{ path('csrf_refund', {id: item.id}) }}">Refund</a></td>
+                <td>{{ form_widget(form["submit_#{item.id}"]) }}</td>
             </tr>
         {% endfor %}
     </table>
+    {{ form_end(form) }}
 
     <h3 class="header">Code</h3>
     {{ hl.hl(code)|raw }}
+
+    <h3 class="header">CSRF Token</h3>
+    {{ hl.hl(token)|raw }}
 
     <h3 class="header">Links</h3>
 

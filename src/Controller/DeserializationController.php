@@ -62,7 +62,7 @@ class DeserializationController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            //...
+            Yaml::parse($yamlString);
         }
 
         return $this->render('deserialization/index.html.twig', [

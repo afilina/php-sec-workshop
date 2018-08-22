@@ -45,13 +45,31 @@ class CsrfController extends Controller
     {
         $purchases = $purchaseRepo->findBy(['user' => 1]);
 
-        //...
+        $formBuilder = $this->createFormBuilder(null);
+        foreach ($purchases as $purchase) {
+            $formBuilder->add('submit_'.$purchase->getId(), SubmitType::class, [
+                'label' => 'Refund'
+            ]);
+        }
+        $form = $formBuilder->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $buttonName = $form->getClickedButton()->getName();
+
+            $id = explode('_', $buttonName)[1];
+            $purchase = $purchaseRepo->findOneBy(['id' => $id, 'user' => 1]);
+            $em->remove($purchase);
+            $em->flush();
+
+            return $this->redirectToRoute('csrf_fixed');
+        }
 
         return $this->render('csrf/fixed.html.twig', [
             'purchases' => $purchases,
-            'form' => '',
-            'code' => '',
-            'token' => '',
+            'form' => $form->createView(),
+            'code' => $reflection->getMethodLines($this, 'indexFixed', 4, 18, true),
+            'token' => $form->createView()->offsetGet('_token')->vars['value'],
         ]);
     }
 

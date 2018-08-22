@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}XSS{% endblock %}
+
+{% block body %}
+    <h3 class="header">Add Comment</h3>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <h3 class="header">Output</h3>
+    {{ comment | raw }}
+
+    <h3 class="header">Code</h3>
+    {{ hl.hl(code)|raw }}
+
+    <h3 class="header">Links</h3>
+    <div class="collection">
+        <a href="{{ path('xss') }}" class="collection-item">Exploit: raw output</a>
+        <a href="{{ path('xss_fixed') }}" class="collection-item">Fixed</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PHP Application Security{% endblock %}
+
+{% block body %}
+    <h3 class="header">Demos</h3>
+
+    <div class="collection">
+        <a href="{{ path('injection', { userId: '1' }) }}" class="collection-item">SQL Injection</a>
+        <a href="{{ path('rainbow_table') }}" class="collection-item">Rainbow Table</a>
+        <a href="{{ path('benchmark') }}" class="collection-item">Password Benchmarks</a>
+        <a href="{{ path('xss') }}" class="collection-item">XSS</a>
+        <a href="{{ path('acl', { purchaseId: 1 }) }}" class="collection-item">Improper Access Control</a>
+        <a href="{{ path('xxe_remote1') }}" class="collection-item">External XML Entities</a>
+        <a href="{{ path('yaml_rm') }}" class="collection-item">Insecure Deserialization</a>
+        <a href="{{ path('csrf') }}" class="collection-item">Cross-Site Request Forgery</a>
+    </div>
+{% endblock %}

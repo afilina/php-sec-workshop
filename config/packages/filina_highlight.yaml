@@ -1,0 +1,5 @@
+services:
+    filina.highlight:
+        class: App\Service\FilinaHighlight
+        autowire: false
+        arguments:

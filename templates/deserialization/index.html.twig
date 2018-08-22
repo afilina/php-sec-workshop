@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Insecure Deserialization{% endblock %}
+
+{% block body %}
+    <h3 class="header">Files</h3>
+    <a href="{{ path('yaml_create_config', {redirect: app.request.get('_route')}) }}">Create config.yaml file</a>
+    {{ hl.hl(ls)|raw }}
+
+    <h3 class="header">YAML</h3>
+    {{ hl.hl(yaml)|raw }}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <h3 class="header">Code</h3>
+    {{ hl.hl(code)|raw }}
+
+    <h3 class="header">Links</h3>
+
+    <div class="collection">
+        <a href="{{ path('yaml_rm') }}" class="collection-item">Emploit: remove file</a>
+        <a href="{{ path('yaml_rm_fixed') }}" class="collection-item">Fixed</a>
+    </div>
+{% endblock %}

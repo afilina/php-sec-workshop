@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rainbow Table{% endblock %}
+
+{% block body %}
+<h3 class="header">Benchmark Results</h3>
+
+<table>
+    <tr>
+        <th>Algo</th>
+        <td>{{ algo }}</td>
+    </tr>
+    <tr>
+        <th>Plaintext length</th>
+        <td>{{ plaintextLength }}</td>
+    </tr>
+    <tr>
+        <th>Number of passes</th>
+        <td>{{ numPasses }}</td>
+    </tr>
+    <tr>
+        <th>Passwords hashed</th>
+        <td>{{ numPasswords }}</td>
+    </tr>
+    <tr>
+        <th>Time (sec)</th>
+        <td>{{ time }}</td>
+    </tr>
+</table>
+
+<h3 class="header">Code</h3>
+{{ hl.hl(code)|raw }}
+
+<h3 class="header">Links</h3>
+
+<div class="collection">
+    <a href="{{ path('benchmark') }}" class="collection-item">MD5</a>
+    <a href="{{ path('benchmark_salted') }}" class="collection-item">MD5 + salt</a>
+    <a href="{{ path('benchmark_repeated') }}" class="collection-item">Bcrypt + cost(10)</a>
+    <a href="{{ path('benchmark_repeated', { cost: 14 }) }}" class="collection-item">Bcrypt + cost(14)</a>
+</div>
+
+{% endblock %}

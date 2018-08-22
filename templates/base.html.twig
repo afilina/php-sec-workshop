@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="/css/highlight.min.css"  media="screen,projection"/>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="nav-wrapper">
+                                <a href="/" class="brand-logo">PHP Application Security</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </main>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

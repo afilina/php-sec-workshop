@@ -1,0 +1,5 @@
+services:
+    filina.reflection:
+        class: App\Service\FilinaReflection
+        autowire: false
+        arguments:

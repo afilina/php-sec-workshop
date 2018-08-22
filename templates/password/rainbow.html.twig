@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rainbow Table{% endblock %}
+
+{% block body %}
+    <h3 class="header">Lookup</h3>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <h3 class="header">Rainbow Table Matches</h3>
+    <table>
+        <tr>
+            <th>Hash Searched</th>
+            <th>Plaintext</th>
+        </tr>
+        {% for item in passwordResults %}
+        <tr>
+            <td>{{ item.hash }}</td>
+            <td>{{ item.plaintext }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3 class="header">Code</h3>
+    {{ hl.hl(code)|raw }}
+
+{% endblock %}

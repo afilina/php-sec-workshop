@@ -2,6 +2,7 @@
 /.env
 /public/bundles/
 /var/
+!/var/data.sqlite
 /vendor/
 ###< symfony/framework-bundle ###
 

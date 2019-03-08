@@ -3,7 +3,12 @@
 {% block title %}PHP Application Security{% endblock %}
 
 {% block body %}
+
     <h3 class="header">Demos</h3>
+
+    {% if error %}
+        <div class="card-panel red lighten-4" role="alert">{{ error }}</div>
+    {% endif %}
 
     <div class="collection">
         <a href="{{ path('injection', { userId: '1' }) }}" class="collection-item">SQL Injection</a>

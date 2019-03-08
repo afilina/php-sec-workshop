@@ -1,7 +1,8 @@
 ###> symfony/framework-bundle ###
 /.env
 /public/bundles/
-/var/
+/var/*
+!/var/data.sqlite
 /vendor/
 ###< symfony/framework-bundle ###
 
